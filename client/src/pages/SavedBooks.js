@@ -15,9 +15,11 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
  
   // replace useEffect() with useQuery() to trigger GET_ME query and retrieve user data
-  const { loading, userData } = useQuery(GET_ME);
-  console.log('userData', userData);
-
+  const { data: userData, loading } = useQuery(GET_ME,
+    {fetchPolicy: 'network-only'});
+  
+  console.log(userData);
+  
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -43,9 +45,9 @@ const SavedBooks = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userData) {
-    return <h2>LOADING...</h2>;
-  }
+  // if (loading) {
+  //   return <h2>LOADING...</h2>;
+  // }
 
   return (
     <>
@@ -55,6 +57,7 @@ const SavedBooks = () => {
         </Container>
       </Jumbotron>
       <Container>
+        {loading && <h2>LOADING...</h2>}
         <h2>
           {userData.savedBooks.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
