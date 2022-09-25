@@ -35,7 +35,11 @@ export const SAVE_BOOK = gql`
             _id
             username
             bookCount
-            savedBooks
+            savedBooks {
+                bookId
+                title
+                authors
+            }
         }
     }
 `;
@@ -47,7 +51,11 @@ export const REMOVE_BOOK = gql`
             _id
             username
             bookCount
-            savedBooks
+            savedBooks {
+                bookId
+                title
+                authors
+            }
         }
     }
 `;

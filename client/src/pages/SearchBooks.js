@@ -143,7 +143,7 @@ const SearchBooks = () => {
                     </Button>
                   )}
                   {/* display error if handleSaveBook fails */}
-                  {error && <span>Something went wrong...</span>}
+                  {error && <span>Something went wrong... </span>}
                 </Card.Body>
               </Card>
             );
