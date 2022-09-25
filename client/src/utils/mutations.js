@@ -29,6 +29,7 @@ export const ADD_USER = gql`
 `;
 
 //add book to user's savedBooks
+//MAKE SURE TO INCLUDE SUBFIELDS FOR NESTED FIELDS SUCH AS SAVEDBOOKS, OR GRAPHQL WILL ERROR OUT
 export const SAVE_BOOK = gql`
     mutation saveBook($input: BookInput!) {
         saveBook(input: $input) {

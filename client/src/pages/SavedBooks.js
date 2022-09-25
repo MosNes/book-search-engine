@@ -42,8 +42,7 @@ const SavedBooks = () => {
     return <h2>LOADING...</h2>;
   }
   
-  console.log('savedBooks', userData.me.savedBooks)
-
+ //use the .me property to access the data from userData
  return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
