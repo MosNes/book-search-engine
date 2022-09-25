@@ -1,7 +1,7 @@
 //import auth error handling from Apollo Server
 const { AuthenticationError } = require('apollo-server-express');
 //import models
-const { User, Book } = require('../models');
+const { User } = require('../models');
 //import signToken functionality
 const { signToken } = require('../utils/auth');
 
@@ -23,18 +23,23 @@ const resolvers = {
 
     Mutation: {
         //create user and sign JWT
-        addUser: async (parent, args) => {
+        addUser: async (parent, {email, username, password}) => {
+            
             //creates new user from provided arguments
-            const user = await User.create(args);
+            const user = await User.create({ 
+                username: username,
+                email: email,
+                password: password
+            });
             //sign new JWT with user's info
             const token = signToken(user);
             return {token, user};
         },
 
         //user logs in and receives token
-        login: async (parent, {email, username, password}) => {
+        login: async (parent, {email, password}) => {
             //find user using email or username
-            const user = await User.findOne({ $or: [{username: username}, {email: email}]});
+            const user = await User.findOne({email: email});
 
             //if username or email is invalid
             if (!user) {
@@ -99,3 +104,5 @@ const resolvers = {
         }
     }
 }
+
+module.exports = resolvers;
