@@ -8,8 +8,6 @@ import { GET_ME } from '../utils/queries';
 //import REMOVE_BOOK mutation
 import { REMOVE_BOOK } from '../utils/mutations';
 
-import { deleteBook } from '../utils/API';
-import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
@@ -17,27 +15,14 @@ const SavedBooks = () => {
   // replace useEffect() with useQuery() to trigger GET_ME query and retrieve user data
   const { data: userData , loading } = useQuery(GET_ME);
 
-  console.log(userData);
-
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
-    // const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    // if (!token) {
-    //   return false;
-    // }
-
+  
     try {
-      // const response = await deleteBook(bookId, token);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const updatedUser = await response.json();
-
+     
+      //call REMOVE_BOOK mutation, passing in the bookId as the variable
       await removeBook({
         variables: {
           bookId: bookId
