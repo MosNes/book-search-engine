@@ -66,10 +66,13 @@ const resolvers = {
             //if request contains a valid user object
             if (context.user) {
                 //try to update the user's savedBooks array with the new book
+
+                console.log('saveBook args', args);
+
                 try {
                     const updatedUser = await User.findOneAndUpdate(
                         { _id: context.user._id },
-                        { $addToSet: { savedBooks: args.BookInput }},
+                        { $addToSet: { savedBooks: args.input }},
                         { new: true, runValidators: true }
                     );
 
