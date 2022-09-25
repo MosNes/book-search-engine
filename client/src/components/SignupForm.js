@@ -33,6 +33,8 @@ const SignupForm = () => {
       event.stopPropagation();
     }
 
+    console.log('userFormData',{...userFormData});
+
     try {
       //execute addUser mutation
       const {data} = await addUser({
